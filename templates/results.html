@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Timing Scout - Results</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Timing Scout</h1>
+
+        <div class="banner {{ verdict.status|lower }}">
+            {{ verdict.status }}
+        </div>
+        <p>{{ verdict.summary }}</p>
+
+        <h2>Timing Summary</h2>
+        <table class="values-table">
+            <tr><th>WNS (ns)</th><td>{{ report.wns_ns }}</td></tr>
+            <tr><th>TNS (ns)</th><td>{{ report.tns_ns }}</td></tr>
+            <tr><th>Failing Endpoints</th><td>{{ report.failing_endpoints }}</td></tr>
+            <tr><th>Total Endpoints</th><td>{{ report.total_endpoints }}</td></tr>
+        </table>
+
+        <h2>Critical Path</h2>
+        <table class="values-table">
+            <tr><th>Startpoint</th><td>{{ report.startpoint }}</td></tr>
+            <tr><th>Endpoint</th><td>{{ report.endpoint }}</td></tr>
+            <tr><th>Path Group</th><td>{{ report.path_group }}</td></tr>
+            <tr><th>Path Type</th><td>{{ report.path_type }}</td></tr>
+            <tr><th>Data Arrival Time (ns)</th><td>{{ report.data_arrival_time_ns }}</td></tr>
+            <tr><th>Data Required Time (ns)</th><td>{{ report.data_required_time_ns }}</td></tr>
+            <tr><th>Slack (ns)</th><td>{{ report.slack_ns }}</td></tr>
+        </table>
+
+        {% if report.missing_fields %}
+        <h2>Missing Fields</h2>
+        <p>The following fields could not be found in the uploaded report:</p>
+        <ul>
+            {% for field in report.missing_fields %}
+            <li>{{ field }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+
+        {% if report.critical_path_lines %}
+        <h2>Raw Critical Path Text</h2>
+        <pre class="critical-path">{% for line in report.critical_path_lines %}{{ line }}
+{% endfor %}</pre>
+        {% endif %}
+
+        <h2>Recommendations</h2>
+        <ul>
+            {% for recommendation in verdict.recommendations %}
+            <li>{{ recommendation }}</li>
+            {% endfor %}
+        </ul>
+
+        {% if ai_explanation %}
+        <h2>AI Explanation</h2>
+        <p class="ai-explanation">{{ ai_explanation }}</p>
+        {% endif %}
+
+        <a class="button" href="/">Analyze Another Report</a>
+    </div>
+</body>
+</html>

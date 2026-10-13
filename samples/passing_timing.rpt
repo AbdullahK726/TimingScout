@@ -1,0 +1,45 @@
+Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
+--------------------------------------------------------------------------------------
+| Tool Version : Vivado v2023.1 (lin64)
+| Date         : Fri Jul 31 09:00:00 2026
+| Command      : report_timing_summary -file timing_summary.rpt
+| Design       : top
+| Device       : xc7a35tcpg236-1
+--------------------------------------------------------------------------------------
+
+NOTE: This is a synthetic, simplified example report created for the
+Timing Scout project. It was not copied from a real Vivado run. It uses
+the same section names and field labels as a real report_timing_summary
+report so the parser can be tested, but the exact spacing and column
+layout of a genuine Vivado report may look slightly different.
+
+------------------------------------------------------------------------------------------------
+| Design Timing Summary
+| ---------------------
+------------------------------------------------------------------------------------------------
+
+    WNS(ns): 0.842
+    TNS(ns): 0.000
+    TNS Failing Endpoints: 0
+    TNS Total Endpoints: 128
+
+------------------------------------------------------------------------------------------------
+| Max Delay Paths
+| ----------------
+------------------------------------------------------------------------------------------------
+
+Slack (MET) :             0.842ns  (required time - arrival time)
+  Startpoint:              decode_stage_reg_reg[3]/C
+                            (rising edge-triggered cell FDRE clocked by clk)
+  Endpoint:                execute_stage_reg_reg[3]/D
+                            (rising edge-triggered cell FDRE clocked by clk)
+  Path Group:              clk
+  Path Type:                Setup (Max at Slow Process Corner)
+  Data Path Delay:         3.947ns  (logic 1.203ns (30.479%)  route 2.744ns (69.521%))
+  Logic Levels:            4  (LUT3, LUT6)
+
+  Data Arrival Time (ns):  3.947
+  Data Required Time (ns): 4.789
+  Path Slack (ns):         0.842
+
+End of Report

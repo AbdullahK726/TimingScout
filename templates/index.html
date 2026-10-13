@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Timing Scout</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Timing Scout</h1>
+        <p class="subtitle">AI-Assisted FPGA Timing Report Analyzer</p>
+
+        <p>
+            Upload a Vivado <code>report_timing_summary</code> text report and
+            Timing Scout will extract the key timing numbers, tell you whether
+            timing PASSED or FAILED, and give a few rule-based suggestions for
+            what to look at next. An LLM can optionally explain the results in
+            plain English, but it never decides PASS or FAIL and never sees
+            your raw report.
+        </p>
+
+        {% if error %}
+        <p class="error">{{ error }}</p>
+        {% endif %}
+
+        <form action="/analyze" method="post" enctype="multipart/form-data">
+            <label for="report_file">Vivado timing report (.rpt or .txt, max 2 MB):</label>
+            <input type="file" id="report_file" name="report_file" accept=".rpt,.txt" required>
+
+            <label class="checkbox-label">
+                <input type="checkbox" name="use_ai">
+                Also generate an optional AI explanation
+            </label>
+
+            <button type="submit">Analyze Report</button>
+        </form>
+
+        <div class="sample-buttons">
+            <p>Or try one of the synthetic sample reports:</p>
+            <a class="button" href="/sample/passing">Analyze Passing Sample</a>
+            <a class="button" href="/sample/failing">Analyze Failing Sample</a>
+        </div>
+
+        <p class="privacy-note">
+            Privacy note: uploaded reports are processed in memory only and
+            are never saved to disk.
+        </p>
+    </div>
+</body>
+</html>

@@ -1,0 +1,45 @@
+Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
+--------------------------------------------------------------------------------------
+| Tool Version : Vivado v2023.1 (lin64)
+| Date         : Fri Jul 31 09:05:00 2026
+| Command      : report_timing_summary -file timing_summary.rpt
+| Design       : top
+| Device       : xc7a35tcpg236-1
+--------------------------------------------------------------------------------------
+
+NOTE: This is a synthetic, simplified example report created for the
+Timing Scout project. It was not copied from a real Vivado run. It uses
+the same section names and field labels as a real report_timing_summary
+report so the parser can be tested, but the exact spacing and column
+layout of a genuine Vivado report may look slightly different.
+
+------------------------------------------------------------------------------------------------
+| Design Timing Summary
+| ---------------------
+------------------------------------------------------------------------------------------------
+
+    WNS(ns): -0.456
+    TNS(ns): -2.345
+    TNS Failing Endpoints: 3
+    TNS Total Endpoints: 150
+
+------------------------------------------------------------------------------------------------
+| Max Delay Paths
+| ----------------
+------------------------------------------------------------------------------------------------
+
+Slack (VIOLATED) :        -0.456ns  (required time - arrival time)
+  Startpoint:              alu_result_reg_reg[7]/C
+                            (rising edge-triggered cell FDRE clocked by clk)
+  Endpoint:                compare_stage_reg_reg[7]/D
+                            (rising edge-triggered cell FDRE clocked by clk)
+  Path Group:              clk
+  Path Type:                Setup (Max at Slow Process Corner)
+  Data Path Delay:         10.234ns  (logic 3.456ns (33.775%)  route 6.778ns (66.225%))
+  Logic Levels:            8  (LUT4, LUT6, wide mux chain)
+
+  Data Arrival Time (ns):  10.234
+  Data Required Time (ns): 9.778
+  Path Slack (ns):         -0.456
+
+End of Report
